@@ -7,9 +7,9 @@ In the upcoming year Pewlett Hackard will conduct an internal audit to find out 
 3. Identifying the positions and titles that need to be filled due to retirements.
 4. Name of the employees who qualify for the mentorship program, indicating their title,employee number, their birth date, and their date of employment.
 
-Resources
-*Data Source: departments.csv, dept_emp.csv, dept_manager.csv, employees.csv, salaries.csv, titles.csv
-*Software: pgAdmin 6.7, Visual Studio Code 1.66.2
+# Resources
+Data Source: departments.csv, dept_emp.csv, dept_manager.csv, employees.csv, salaries.csv, titles.csv
+Software: pgAdmin 6.7, Visual Studio Code 1.66.2
 
 # Results
 The retirement analysis shows that:
@@ -23,6 +23,7 @@ The mentoring program is only accessible to 1,549 of all potential retirees. Sin
 # Summary
 Without including those eligible for the mentorship program, the upcoming 'Silver Tsunami' could lose 90,398 employees. With the mentorship program, perhaps adding 1,549 more employees, there are still a considerable number of roles that need to be filled. Approximately 1 mentore for every 58 new employees would be the mentor-to-new employee ratio.
 
+
 SELECT  title,
 	COUNT(title)
 INTO mentor_count
@@ -30,7 +31,9 @@ FROM mentorship_eligibility
 GROUP BY title
 ORDER BY COUNT(title) DESC;
 
+
 You can use the query below to create a more detailed breakdown of how many potential mentors there are per role that could be filled compared to how many new roles must be filled per title.
+
 
 SELECT DISTINCT ON (e.emp_no) e.emp_no,
 	e.first_name,
@@ -49,5 +52,6 @@ WHERE (birth_date BETWEEN '1956-01-01' AND '9999-01-01')
 	AND de.to_date = ('9999-01-01')
 	AND title = ('Engineer')
 ORDER BY emp_no;
+
 
 To conclude, an analysis can be conducted to determine how many promotions can be done versus how many new hires are needed to keep up with the changes. The query below could be used as a basis for the analysis. In this way, the human resources department of the company would have a clear idea of when each of the titles may be promoted.
